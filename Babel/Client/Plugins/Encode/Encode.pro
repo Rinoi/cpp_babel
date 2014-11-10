@@ -13,23 +13,14 @@ TEMPLATE = lib
 
 DEFINES += ENCODE_LIBRARY
 
-SOURCES += kernel.cpp \
-                src/UserPeriph.cpp \
-                src/Audio/Input/PortAudio/Periph.cpp \
-                src/Audio/Output/PortAudio/Periph.cpp \
-                src/Audio/PortAudio/Stream.cpp \
+SOURCES += kernel.cpp \              
                 src/Audio/Opus/Encode.cpp \
-                src/Audio/AudioPacket.cpp \
+../../../Common/Network/Packet.cpp
 
 
 
 HEADERS += kernel.h \
-                inc/UserPeriph.cpp \
-                inc/Audio/Input/PortAudio/Periph.cpp \
-                inc/Audio/Output/PortAudio/Periph.cpp \
-                inc/Audio/PortAudio/Stream.cpp \
-                inc/Audio/Opus/Encode.cpp \
-                inc/Audio/AudioPacket.cpp \
+                inc/Babel/Audio/IEncode.hh \
 
 HEADERS +=      ../../Common/IPluginView.h          \
                 ../../Common/IClientPlugin.h        \
@@ -39,15 +30,20 @@ HEADERS +=      ../../Common/IPluginView.h          \
 HEADERS +=      ../../../Common/IPlugin.h           \
                 ../../../Common/Network/Packet.hpp
 
-
 unix {
     target.path = /usr/lib
     INSTALLS += target
 }
 
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../../../../../../../lib/opusfile/ -llibopusfile
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../../../../../../../lib/opusfile/ -llibopusfiled
-else:unix: LIBS += -L$$PWD/../../../../../../../../lib/opusfile/ -llibopusfile
+INCLUDEPATH += $$quote(C:\\Program Files (x86)\\portaudio\\include\\)
+INCLUDEPATH += ./inc
+INCLUDEPATH += $$quote(C:\\Program Files (x86)\\opus-1.1\\include)
+INCLUDEPATH += $$quote(C:\\Users\\louis\\Downloads\\opus-1.1.tar\\opus-1.1\\win32)
 
-INCLUDEPATH += $$PWD/../../../../../../../../lib/opusfile
-DEPENDPATH += $$PWD/../../../../../../../../lib/opusfile
+LIBS += C:\Users\louis\Downloads\pa_stable_v19_20140130\portaudio\build\msvc\x64\Debug\portaudio_x64.lib
+
+LIBS += C:\Users\louis\Downloads\opus-1.1.tar\opus-1.1\win32\VS2010\x64\Debug\opus.lib
+LIBS += C:\Users\louis\Downloads\opus-1.1.tar\opus-1.1\win32\VS2010\x64\Debug\celt.lib
+LIBS += C:\Users\louis\Downloads\opus-1.1.tar\opus-1.1\win32\VS2010\x64\Debug\silk_common.lib
+LIBS += C:\Users\louis\Downloads\opus-1.1.tar\opus-1.1\win32\VS2010\x64\Debug\silk_float.lib
+LIBS += C:\Users\louis\Downloads\opus-1.1.tar\opus-1.1\win32\VS2010\x64\Debug\silk_fixed.lib

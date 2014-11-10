@@ -8,6 +8,8 @@
 #endif
 
 #include    "../../Common/IClientPlugin.h"
+#include    "IStream.hpp"
+#include    "IEncode.hpp"
 
 namespace Babel
 {
@@ -26,11 +28,35 @@ public:
 
 public:
     bool            handlePacket(const Babel::Common::Network::Packet &);
-    bool            needGraphicUI(void);
-    void            setGraphicUI(Babel::Client::Common::IPluginView *ipluginView);
-    void            setNetworkInterface(Babel::Client::Common::INetworkManager *network);
+    bool            needGraphicUI(void)
+    {
+        return false;
+    }
+
+    void            setGraphicUI(Babel::Client::Common::IPluginView *ipluginView) {}
+    void            setNetworkInterface(Babel::Client::Common::INetworkManager *network)
+    {
+        this->_network = network;
+    }
+
+    bool            init();
 
 private:
+
+    bool            getInputStream(const Babel::Common::Network::Packet &);
+    bool            getOutputStream(const Babel::Common::Network::Packet &);
+    bool            getEncode(const Babel::Common::Network::Packet &);
+
+    //tmp
+
+    bool            call(const QString &ip);
+
+private:
+
+    Babel::IStream                          *inputStream;
+    Babel::IStream                          *outputStream;
+    Babel::Audio::IEncode                   *encode;
+
     Babel::Client::Common::IPluginView      *_graphicView;
     Babel::Client::Common::INetworkManager  *_network;
 };

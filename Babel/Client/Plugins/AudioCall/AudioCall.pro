@@ -14,14 +14,17 @@ TEMPLATE = lib
 
 DEFINES += AUDIOCALL_LIBRARY
 
-SOURCES += Kernel.cpp
+SOURCES += Kernel.cpp \
+                            ../../../Common/Network/Packet.cpp  \
 
 HEADERS += Kernel.h
+HEADERS += IEncode.hpp
+HEADERS += IStream.hpp
 
 HEADERS +=      ../../Common/IPluginView.h          \
                 ../../Common/IClientPlugin.h        \
                 ../../Common/INetworkManager.h      \
-                ../../Common/QPacket.h
+                ../../Common/QPacket.h              \
 
 HEADERS +=      ../../../Common/IPlugin.h           \
                 ../../../Common/Network/Packet.hpp

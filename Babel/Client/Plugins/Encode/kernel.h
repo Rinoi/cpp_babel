@@ -21,7 +21,7 @@ namespace   Plugins
 {
 namespace   Encode
 {
-class ENCODESHARED_EXPORT Kernel : public Babel::Client::Common::IClientPlugin, public Babel::Audio::IEncode
+class ENCODESHARED_EXPORT Kernel : public Babel::Client::Common::IClientPlugin
 {
 
 public:
@@ -45,14 +45,12 @@ public:
 
     bool                handlePacket(const Babel::Common::Network::Packet &packet);
 
-public:
-    std::list<Babel::Audio::IEncode::t_packet>
-    encode(SAMPLE *data, unsigned int size) const;
-
-    SAMPLE *
-    decode(const std::list<t_packet> &packet, unsigned int *size) const;
+private:
+    bool                getEncode(const Babel::Common::Network::Packet &packet) const;
 
 private:
+
+    Babel::Audio::IEncode       *encode;
     Common::INetworkManager     *_network;
     int                         nb_frame;
 

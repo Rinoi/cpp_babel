@@ -14,7 +14,7 @@ namespace	Babel
 
     Application::Application(int ac, char *av[]) :
       _app(ac, av),
-      _network("10.17.72.255", 4242, 8080),
+      _network("localhost", 4242, 8080),
       _anchor(*this)
     {
       this->_qmlEngine.load(QUrl(QStringLiteral("qrc:/main.qml")));

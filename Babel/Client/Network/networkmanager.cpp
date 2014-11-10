@@ -1,17 +1,16 @@
 #include "networkmanager.h"
-#include "../Common/QPacket.h"
 
 namespace Babel {
 namespace Client {
 namespace Network {
 
 NetworkManager::NetworkManager(int udport) :
-    _host(QString("")), _port(4242), _inst(NULL), _callBack(NULL) {
+    _host(QString("")), _port(4242) {
     this->_clients.initSocket(udport);
 }
 
 NetworkManager::NetworkManager(const QString &serv, int port, int my) :
-    _host(serv), _port(port), _inst(NULL), _callBack(NULL), _server(), _clients() {
+    _host(serv), _port(port), _server(), _clients() {
     this->_clients.initSocket(my);
 }
 
@@ -58,16 +57,6 @@ bool NetworkManager::SendToServer(const ::Babel::Common::Network::Packet &pack) 
     return false;
 }
 
-void    NetworkManager::sendToYourself(const ::Babel::Common::Network::Packet &pack) {
-    if (this->_inst && this->_callBack) {
-        QByteArray  data((const char *)pack.getData());
-        const ::Babel::Common::Network::Header &hed = pack.getConstHeader();
-        ::Babel::Client::Network::QPacket *packet = new ::Babel::Client::Network::QPacket(hed.pluginId, hed.actionId, hed.response, hed.senderId, hed.receiverId, data);
-        (this->_inst->*(this->_callBack))(*packet);
-    }
-}
-
-
 bool NetworkManager::ConnectToClient(const QString &ip, int port) {
     this->_clients.connectClient(ip, port);
     return true;
@@ -108,8 +97,6 @@ bool     NetworkManager::goSingleCast() {
 
 void    NetworkManager::setRedirect(Babel::Client::PluginLoader *inst, plugloadPtr callBack) {
     this->_server.setRedirectCallback(inst, callBack);
-    this->_inst = inst;
-    this->_callBack = callBack;
 }
 
 }

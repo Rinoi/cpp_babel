@@ -22,9 +22,6 @@ public:
     void setHost(const QString &);
     void setPort(int);
 
-    // To yourself
-    void    sendToYourself(const ::Babel::Common::Network::Packet &pack);
-
     // TCP protocol, works with server
     bool ConnectToServer(Babel::Client::Application *instance, appPtr ptrCallback);
     bool SendToServer(const ::Babel::Common::Network::Packet &pack);
@@ -45,10 +42,9 @@ public:
 private:
     QString         _host;
     int             _port;
-    Babel::Client::PluginLoader *_inst;
-    plugloadPtr     _callBack;
     NetworkTCP      _server;
     NetworkUDP      _clients;
+
 };
 
 }

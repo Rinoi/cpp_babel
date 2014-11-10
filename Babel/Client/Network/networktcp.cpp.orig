@@ -1,0 +1,219 @@
+#include "networktcp.h"
+#include "../Application.h"
+
+namespace Babel {
+namespace Client {
+namespace Network {
+
+NetworkTCP::NetworkTCP() :
+    QObject(0), _sock(this), _blockSize(0), _connected(false),
+    _completing(false), _header(false), _connectionCallback(0), _callbackInst(0),
+    _redirectCallback(0), _redirectInst(0) {
+}
+
+NetworkTCP::~NetworkTCP()
+{
+
+}
+
+bool    NetworkTCP::isConnected() {
+    if (this->_connected == false)
+        return (this->_connected);
+    std::cout << this->_sock.state() << std::endl;
+    return (this->_sock.state() == QAbstractSocket::ConnectedState);
+}
+
+bool    NetworkTCP::waitConnectionServer() {
+    if (this->_connected) {
+        if(!this->_sock.waitForConnected(5000)) {
+            _connected = false;
+            std::cerr << "Error NetworkTCP: "
+                      << _sock.errorString().toStdString()
+                      << std::endl;
+        }
+        else
+            _connected = true;
+    }
+    return false;
+}
+
+void    NetworkTCP::connectToHost(const QString &host, int port) {
+
+    connect(&_sock, SIGNAL(readyRead()), this, SLOT(readPackets()));
+    connect(&_sock, SIGNAL(error(QAbstractSocket::SocketError)),
+            this, SLOT(readErr(QAbstractSocket::SocketError)));;
+    connect(&_sock, SIGNAL(connected()),
+            this, SLOT(serverConnected()));
+    this->_blockSize = 0;
+    this->_sock.abort();
+    this->_sock.connectToHost(host, port);
+    this->_connected = true;
+}
+
+void    NetworkTCP::deconnectFromHost() {
+    this->_sock.abort();
+    this->_connected = false;
+}
+
+void    NetworkTCP::readPackets()
+{
+    QByteArray  data = this->_sock.readAll();
+
+    this->updatePackets(data);
+}
+
+void    NetworkTCP::readErr(QAbstractSocket::SocketError scktErr)
+{
+    switch (scktErr) {
+        case QAbstractSocket::RemoteHostClosedError:
+            break;
+        case QAbstractSocket::HostNotFoundError:
+            std::cerr << "Network TCP : "
+                      << "The host was not found. Please check the "
+                                        "host name and port settings."
+                      << std::endl;
+            break;
+        case QAbstractSocket::ConnectionRefusedError:
+            std::cerr << "Network TCP : "
+                  << "The connection was refused by the peer. "
+                     "Make sure the server is running, "
+                     "and check that the host name and port "
+                     "settings are correct."
+                  << std::endl;
+            if (this->_callbackInst) {
+               (this->_callbackInst->*(this->_connectionCallback))(false);
+            }
+            break;
+        default:
+        std::cerr << "Network TCP : "
+              << "The following error occurred: "
+              << this->_sock.errorString().toStdString() << std::endl;
+        }
+}
+
+void    NetworkTCP::serverConnected() {
+    if (this->_callbackInst) {
+       (this->_callbackInst->*(this->_connectionCallback))(true);
+    }
+}
+
+void    NetworkTCP::setConnectionCallback(Babel::Client::Application *inst, appPtr ptr) {
+    this->_callbackInst = inst;
+    this->_connectionCallback = ptr;
+}
+
+int NetworkTCP::send(const ::Babel::Common::Network::Packet &pack)
+{
+    if (this->isConnected())
+    {
+<<<<<<< local
+        qint64 len = pack.getDataSize();
+        qDebug() << len;
+
+=======
+>>>>>>> other
+        this->_sock.write((const char *)(&pack.getConstHeader()), pack.getHeaderSize());
+        this->_sock.write((const char *)pack.getData(), pack.getDataSize());
+        if (this->_sock.waitForBytesWritten() == false) {
+            std::cerr << "NetworkTCP : Cannot send message (not connected)"
+                      << std::endl;
+        }
+        return pack.getDataSize();
+    }
+    std::cerr << "NetworkTCP : Cannot send message (not connected)"
+              << std::endl;
+    return 0;
+}
+
+::Babel::Common::Network::Packet   *NetworkTCP::recieve()
+{
+    return getPacket();
+}
+
+const ::Babel::Common::Network::byte *NetworkTCP::serialize(::Babel::Common::Network::Packet &pack)
+{
+    return (pack.getData());
+}
+
+::Babel::Common::Network::Packet NetworkTCP::deserialize(::Babel::Common::Network::byte *data)
+{
+    ::Babel::Common::Network::Packet  pack;
+
+    pack.setData(data);
+    return pack;
+}
+
+QString NetworkTCP::encrypt(const QString &) {
+    return QString("");
+}
+
+QString NetworkTCP::decrypt(const QString &) {
+    return QString("");
+
+}
+
+std::string NetworkTCP::encrypt(const std::string &) {
+    return ("");
+}
+
+std::string NetworkTCP::decrypt(const std::string &) {
+    return ("");
+}
+
+void    NetworkTCP::fillPacketHeader() {
+    ::Babel::Common::Network::Header  &head = this->_current->getHeader();
+
+    head = *((::Babel::Common::Network::Header *)(this->_currentData.data()));
+    this->_currentData = this->_currentData.right(this->_currentData.size() - SIZE_HEADER);
+}
+
+void    NetworkTCP::updatePackets(QByteArray &data) {
+    if (!this->_completing) {
+        unsigned long   len = 0;
+        len = this->_currentData.size();
+        this->_currentData.append(data);
+        if (!this->_header) {
+            if (len >= SIZE_HEADER) {
+                this->_header = true;
+                this->_current = new ::Babel::Common::Network::Packet();
+                fillPacketHeader();
+            }
+        }
+        if (this->_current)
+            len = this->_current->getDataSize();
+        if (this->_header &&
+            this->_current->getDataSize() - this->_currentData.size() >= 0) {
+            this->_completing = true;
+        }
+    }
+    if (this->_completing) {
+
+        this->_currentData = this->_currentData.right(this->_current->getDataSize());
+        this->_current->setData((::Babel::Common::Network::byte *)(this->_currentData.data()));
+        this->_completing = false;
+        this->_header = false;
+        this->_packets.append(this->_current);
+        this->_current = NULL;
+    }
+    while (!this->_packets.empty() && this->_redirectCallback) {
+        (this->_redirectInst->*(this->_redirectCallback))(*this->_packets.front());
+        this->_packets.pop_front();
+    }
+}
+
+::Babel::Common::Network::Packet  *NetworkTCP::getPacket() {
+    if (this->_packets.isEmpty())
+        return NULL;
+    ::Babel::Common::Network::Packet  *pack = this->_packets.front();
+    this->_packets.pop_front();
+    return pack;
+}
+
+void    NetworkTCP::setRedirectCallback(Babel::Client::PluginLoader *inst, plugloadPtr callBack) {
+    this->_redirectInst = inst;
+    this->_redirectCallback = callBack;
+}
+
+}
+}
+}

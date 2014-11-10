@@ -70,6 +70,7 @@ namespace					Babel
 	    plugin = this->_pluginLoader->Load("./Plugins/" + it->name + "/plugin" + it->name);
 	    if (plugin != NULL)
 	      {
+		plugin->setId(it->id);
 		this->_plugins[it->id] = plugin;
 		std::cout << it->name << " (" << plugin->getName() << ")" << std::endl;
 	      }

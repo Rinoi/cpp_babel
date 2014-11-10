@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2013 for Windows Desktop
+VisualStudioVersion = 12.0.30723.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Server", "Server.vcxproj", "{51217EE1-2F91-40B2-8A9E-FC3492D8E11B}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Connection", "Plugins\Connection\Connection.vcxproj", "{08005ABB-1892-4ADB-9B23-EB5B64684FF3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{51217EE1-2F91-40B2-8A9E-FC3492D8E11B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{51217EE1-2F91-40B2-8A9E-FC3492D8E11B}.Debug|Win32.Build.0 = Debug|Win32
+		{51217EE1-2F91-40B2-8A9E-FC3492D8E11B}.Release|Win32.ActiveCfg = Release|Win32
+		{51217EE1-2F91-40B2-8A9E-FC3492D8E11B}.Release|Win32.Build.0 = Release|Win32
+		{08005ABB-1892-4ADB-9B23-EB5B64684FF3}.Debug|Win32.ActiveCfg = Debug|Win32
+		{08005ABB-1892-4ADB-9B23-EB5B64684FF3}.Debug|Win32.Build.0 = Debug|Win32
+		{08005ABB-1892-4ADB-9B23-EB5B64684FF3}.Release|Win32.ActiveCfg = Release|Win32
+		{08005ABB-1892-4ADB-9B23-EB5B64684FF3}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

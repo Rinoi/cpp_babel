@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Resources/Connection.qml</file>
+        <file>Resources/email.svg</file>
+        <file>Resources/lock.svg</file>
+        <file>Resources/firstname.svg</file>
+        <file>Resources/lastname.svg</file>
+    </qresource>
+</RCC>

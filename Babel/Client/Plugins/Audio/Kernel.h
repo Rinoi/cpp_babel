@@ -1,8 +1,7 @@
-#ifndef KERNEL_H
-#define KERNEL_H
+#ifndef _BABEL_AUDIO_KERNEL_H
+#define _BABEL_AUDIO_KERNEL_H
 
 #include <QtCore/qglobal.h>
-#include "./inc/Babel/UserPeriph.hh"
 
 #if defined(AUDIO_LIBRARY)
 #  define AUDIOSHARED_EXPORT Q_DECL_EXPORT
@@ -10,6 +9,7 @@
 #  define AUDIOSHARED_EXPORT Q_DECL_IMPORT
 #endif
 
+#include "./inc/Babel/UserPeriph.hh"
 #include "../../Common/IClientPlugin.h"
 
 namespace   Babel
@@ -42,14 +42,16 @@ public:
 
     bool            handlePacket(const Babel::Common::Network::Packet &);
 
-private:
+    bool            init(void) {return true;}
 
+private:
+/*
     bool            getInputStream(const Babel::Common::Network::Packet &);
     bool            getOutputStream(const Babel::Common::Network::Packet &);
-
+*/
 private:
     Common::INetworkManager *_network;
-    Babel::UserPeriph       userP;
+    //Babel::UserPeriph       userP;
 
 };
 

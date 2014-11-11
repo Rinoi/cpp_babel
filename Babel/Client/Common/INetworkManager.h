@@ -20,7 +20,6 @@ public:
     virtual void setHost(const QString &) = 0;
     virtual void setPort(int) = 0;
 
-    //to yourself
     virtual void    sendToYourself(const ::Babel::Common::Network::Packet &pack) = 0;
 
     // TCP protocol, works with server

@@ -15,6 +15,8 @@ namespace	Babel
     Application::Application(int ac, char *av[]) :
       _app(ac, av),
       _network("localhost", 4242, 8080),
+//      _network("10.17.72.243", 4242, 8080),
+//      _network("localhost", 4242, 8080),
       _anchor(*this)
     {
       this->_qmlEngine.load(QUrl(QStringLiteral("qrc:/main.qml")));
@@ -53,6 +55,23 @@ namespace	Babel
                 std::cout << "HELLO efwefwe" << std::endl;
             }
         }
+
+
+        if ((plugin = this->_pluginLoader.loadPlugin("AudioCall")) != 0)
+        {
+                qDebug() << "module AudioCall loaded";
+        }
+        if ((plugin = this->_pluginLoader.loadPlugin("Audio")) != 0)
+        {
+                qDebug() << "module Audio loaded";
+        }
+
+
+        if ((plugin = this->_pluginLoader.loadPlugin("Encode")) != 0)
+        {
+                qDebug() << "module Encode loaded";
+        }
+
     }
 
     void

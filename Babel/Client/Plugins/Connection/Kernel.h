@@ -34,6 +34,7 @@ namespace	Babel
     public:
       bool										handlePacket(const Babel::Common::Network::Packet &);
       bool										needGraphicUI(void);
+      bool                                      init(void) { return true; }
       void										setGraphicUI(Babel::Client::Common::IPluginView *view);
       void										setNetworkInterface(Babel::Client::Common::INetworkManager *);
 

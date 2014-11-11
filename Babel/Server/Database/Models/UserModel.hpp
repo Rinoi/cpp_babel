@@ -1,8 +1,9 @@
 #ifndef				__USER_STRUCT__
 #define				__USER_STRUCT__
 
+#include			"../AbsModelBDatabase.hpp"
+
 #include			<string>
-#include			"AbsModelBDatabase.hpp"
 
 class					User {
 public:

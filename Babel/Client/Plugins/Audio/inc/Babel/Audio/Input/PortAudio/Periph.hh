@@ -9,9 +9,6 @@ extern "C"
 }
 
 
-#include "../Encode/inc/Babel/Audio/Input/APeriph.hpp"
-
-
 # include "Babel/Audio/Input/APeriph.hpp"
 # include "Babel/Audio/PortAudio/Stream.hh"
 

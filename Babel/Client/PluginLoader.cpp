@@ -18,7 +18,7 @@ namespace	Babel
 	{
       QLibrary	lib(absolutePath);
 
-      ::std::cerr << absolutePath.toStdString();
+      qDebug() << absolutePath;
 	  if (lib.load() == true)
 	    {
 	      funcPtr	instantiatePlugin = (funcPtr)(lib.resolve("Instantiate"));
@@ -27,13 +27,20 @@ namespace	Babel
           Common::IClientPlugin	*plugin = instantiatePlugin();
 		  this->_loadedPlugins[filename] = plugin;
           this->_needId.append(filename);
-          (void)filename;
 		  return (plugin);
 		}
+        else
+          {
+          qDebug() << "problem de resolution de nom";
+          }
 	    }
+      else
+      {
+          qDebug() << "lib not loaded";
+      }
 	  // replace by a runtime_error throw
-	  qDebug() << lib.errorString();
-	  return (0);
+      qDebug() << lib.errorString();
+      return (0);
 	}
       return (this->_loadedPlugins[filename]);
     }

@@ -1,5 +1,18 @@
 #include "Kernel.h"
 
+#ifdef Q_OS_WIN
+#  define MY_EXPORT __declspec(dllexport)
+#else
+#  define MY_EXPORT
+#endif
+
+
+extern "C" MY_EXPORT Babel::Client::Common::IClientPlugin *Instantiate(void)
+{
+  return new Babel::Client::Plugins::Audio::Kernel();
+}
+
+
 namespace   Babel
 {
 namespace   Client
@@ -23,14 +36,14 @@ Kernel::handlePacket(const Babel::Common::Network::Packet &packet)
 {
     qDebug() << "[ENCODE PLUGIN] : handle packet called";
 
-    if (packet.getConstHeader().actionId == 1)
+    /*if (packet.getConstHeader().actionId == 1)
         return (this->getInputStream(packet));
-    if (packet.getConstHeader().actionId == 1)
-        return (this->getOutputStream(packet));
+    if (packet.getConstHeader().actionId == 2)
+        return (this->getOutputStream(packet));*/
 
     return true;
 }
-
+/*
 bool
 Kernel::getInputStream(const Babel::Common::Network::Packet &packet)
 {
@@ -45,7 +58,7 @@ Kernel::getInputStream(const Babel::Common::Network::Packet &packet)
 
         *(void **)(data) = (void *)(this->userP.getDefaultAInput());
         Babel::Common::Network::Packet p(header.pluginId, b, 0, 0, 0, sizeof(void *), data);
-        this->_network->SendToServer(p);
+        this->_network->sendToYourself(p);
         return (true);
     }
     return (false);
@@ -66,13 +79,13 @@ Kernel::getOutputStream(const Babel::Common::Network::Packet &packet)
 
         *(void **)(data) = (void *)(this->userP.getDefaultAInput());
         Babel::Common::Network::Packet p(header.pluginId, b, 0, 0, 0, sizeof(void *), data);
-        this->_network->SendToServer(p);
+        this->_network->sendToYourself(p);
         return (true);
     }
     return (false);
 
 }
-
+*/
 }
 }
 }

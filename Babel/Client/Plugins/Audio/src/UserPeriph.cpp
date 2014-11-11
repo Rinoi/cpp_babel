@@ -1,21 +1,31 @@
 #include "../inc/Babel/UserPeriph.hh"
 
+extern "C"
+{
+#include "portaudio.h"
+
+}
+
 namespace Babel
 {
+
   UserPeriph::UserPeriph()
   {
     int         err;
 
     err = Pa_Initialize();
-    if (err != paNoError)
-      {
-	std::cout << "cannot init pa" << std::endl;
-        return ;
-      }
-    this->defaultAInput = new Babel::Audio::Input::PortAudio::Periph(Pa_GetDefaultInputDevice());
-    this->defaultAInput->changeActivity();
-    this->defaultAOutput = new Babel::Audio::Output::PortAudio::Periph(Pa_GetDefaultOutputDevice());
-    this->defaultAOutput->changeActivity();
+//    if (err != paNoError)
+//      {
+//    std::cout << "cannot init pa" << std::endl;
+//        return ;
+//      }
+
+//    this->defaultAInput = new Babel::Audio::Input::PortAudio::Periph(Pa_GetDefaultInputDevice());
+//    this->defaultAInput->changeActivity();
+//    this->defaultAOutput = new Babel::Audio::Output::PortAudio::Periph(Pa_GetDefaultOutputDevice());
+//    this->defaultAOutput->changeActivity();
+    this->defaultAInput = 0;
+    this->defaultAOutput = 0;
   }
 
   UserPeriph::~UserPeriph()
@@ -23,12 +33,12 @@ namespace Babel
 
   }
 
-  Audio::Input::APeriph		*UserPeriph::getDefaultAInput()
+  IPeriph		*UserPeriph::getDefaultAInput()
   {
     return (this->defaultAInput);
   }
 
-  Audio::Output::APeriph       	*UserPeriph::getDefaultAOutput()
+  IPeriph       	*UserPeriph::getDefaultAOutput()
   {
     return (this->defaultAOutput);
   }

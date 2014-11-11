@@ -17,8 +17,6 @@ SOURCES += kernel.cpp \
                 src/Audio/Opus/Encode.cpp \
 ../../../Common/Network/Packet.cpp
 
-
-
 HEADERS += kernel.h \
                 inc/Babel/Audio/IEncode.hh \
 
@@ -35,12 +33,9 @@ unix {
     INSTALLS += target
 }
 
-INCLUDEPATH += $$quote(C:\\Program Files (x86)\\portaudio\\include\\)
 INCLUDEPATH += ./inc
 INCLUDEPATH += $$quote(C:\\Program Files (x86)\\opus-1.1\\include)
 INCLUDEPATH += $$quote(C:\\Users\\louis\\Downloads\\opus-1.1.tar\\opus-1.1\\win32)
-
-LIBS += C:\Users\louis\Downloads\pa_stable_v19_20140130\portaudio\build\msvc\x64\Debug\portaudio_x64.lib
 
 LIBS += C:\Users\louis\Downloads\opus-1.1.tar\opus-1.1\win32\VS2010\x64\Debug\opus.lib
 LIBS += C:\Users\louis\Downloads\opus-1.1.tar\opus-1.1\win32\VS2010\x64\Debug\celt.lib

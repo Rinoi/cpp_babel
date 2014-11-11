@@ -14,6 +14,7 @@ namespace	Babel
       class				IClientPlugin : public Babel::Common::IPlugin
       {
       public:
+          virtual bool    init(void) = 0;
           virtual bool    needGraphicUI(void) = 0;
           virtual void    setGraphicUI(IPluginView *) = 0;
           virtual void    setNetworkInterface(Babel::Client::Common::INetworkManager *) = 0;

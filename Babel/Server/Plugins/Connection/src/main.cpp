@@ -1,6 +1,6 @@
 #include <iostream>
 #include "Plugin.hh"
-#include "../../../Network/Server.hpp"
+#include "../../../Network/IServer.hpp"
 #include "boost/predef.h"
 
 #if BOOST_OS_WINDOWS

@@ -1,6 +1,5 @@
 #include "PluginLoaderWindows.hh"
 
-#include <windows.h>
 
 namespace Babel
 {

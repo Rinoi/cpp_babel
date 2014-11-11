@@ -3,7 +3,7 @@
 #include <boost/algorithm/string.hpp>
 
 #include "Plugin.hh"
-#include "../../../Network/Session.hpp"
+#include "../../../Network/ISession.hpp"
 #include "../../../Database/AbsModelBDatabase.hpp"
 #include "../../../Database/Models/UserModel.hpp"
 
@@ -173,7 +173,7 @@ namespace Connection
     std::string					firstName;
     std::string					lastName;
     int						idx = 0;
-    Babel::Server::Network::Session		*session;
+    Babel::Server::Network::ISession		*session;
     std::string					s;
     std::string					c;
 
@@ -182,10 +182,10 @@ namespace Connection
     s = std::string((const char *)p.getData());
     std::vector<std::string> strs;
     boost::split(strs, s, boost::is_any_of(c.c_str()));
-    Babel::Server::Network::Session ** pp;
+    Babel::Server::Network::ISession ** pp;
 
-    pp = (Babel::Server::Network::Session **)(p.getData() + header.dataSize);
-    session = (Babel::Server::Network::Session *)(*pp);
+    pp = (Babel::Server::Network::ISession **)(p.getData() + header.dataSize);
+    session = (Babel::Server::Network::ISession *)(*pp);
     if (strs.size() != 4)
       {
 	Babel::Common::Network::Packet p(header.pluginId, header.actionId, 10, 0, 0, 0, NULL);

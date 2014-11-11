@@ -5,8 +5,8 @@
 #include			<boost/predef.h>
 
 # if BOOST_OS_WINDOWS
-#include "core\soci.h"
-# include "backends\mysql\soci-mysql.h"
+#  include "core\soci.h"
+#  include "backends\mysql\soci-mysql.h"
 # else
 #  include			"soci/soci.h"
 #  include			"soci/mysql/soci-mysql.h"

@@ -20,12 +20,7 @@ public:
     virtual void setHost(const QString &) = 0;
     virtual void setPort(int) = 0;
 
-<<<<<<< HEAD:Babel/Client/Common/inetworkmanager.h
-    virtual void sendToYourself(const ::Babel::Common::Network::Packet &pack) = 0;
-=======
-    //to yourself
     virtual void    sendToYourself(const ::Babel::Common::Network::Packet &pack) = 0;
->>>>>>> 3c307c026de85d5ce232c9b38730832bd639a238:Babel/Client/Common/INetworkManager.h
 
     // TCP protocol, works with server
     virtual bool SendToServer(const ::Babel::Common::Network::Packet &pack) = 0;

@@ -6,7 +6,7 @@
 #include <list>
 
 #include "AServerPlugin.hpp"
-#include "Server.hpp"
+#include "IServer.hpp"
 
 namespace Message
 {
@@ -25,7 +25,7 @@ namespace Message
       byte		op;
     } t_plugin_event;
 
-    Plugin(Babel::Server::Network::Server *server);
+    Plugin(Babel::Server::Network::IServer *server);
     ~Plugin();
 
     bool				init();
@@ -39,7 +39,7 @@ namespace Message
 
     fct					*list;
     int					max_fct;
-    Babel::Server::Network::Server *	server;
+    Babel::Server::Network::IServer *	server;
 
   };
 

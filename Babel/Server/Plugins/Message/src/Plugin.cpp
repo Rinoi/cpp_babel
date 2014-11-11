@@ -10,7 +10,7 @@
 
 namespace Message
 {
-  Plugin::Plugin(Babel::Server::Network::Server *server)
+  Plugin::Plugin(Babel::Server::Network::IServer *server)
   {
     this->server = server;
     this->max_fct = 1;

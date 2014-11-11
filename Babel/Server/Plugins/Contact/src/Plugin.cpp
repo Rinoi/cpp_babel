@@ -3,13 +3,12 @@
 #include <boost/algorithm/string.hpp>
 
 #include "Plugin.hh"
-#include "Session.hpp"
 #include "AbsModelBDatabase.hpp"
 #include "UserModel.hpp"
 
 namespace Contact
 {
-  Plugin::Plugin(Babel::Server::Network::Server *server)
+  Plugin::Plugin(Babel::Server::Network::IServer *server)
   {
     this->name = "contact";
     this->server = server;

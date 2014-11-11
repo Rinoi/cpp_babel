@@ -5,7 +5,7 @@
 #include <list>
 
 #include "AServerPlugin.hpp"
-#include "Server.hpp"
+#include "IServer.hpp"
 
 namespace Contact
 {
@@ -25,7 +25,7 @@ namespace Contact
     } t_plugin_event;
 
   public:
-    Plugin(Babel::Server::Network::Server *server);
+    Plugin(Babel::Server::Network::IServer *server);
     ~Plugin();
 
     bool				init();
@@ -58,7 +58,7 @@ namespace Contact
 
     fct					*list;
     int					max_fct;
-    Babel::Server::Network::Server *	server;
+    Babel::Server::Network::IServer *	server;
 
 
   };

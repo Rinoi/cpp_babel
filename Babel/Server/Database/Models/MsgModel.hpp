@@ -2,6 +2,7 @@
 #define				__MSG_STRUCT__
 
 #include			<string>
+#include			<ctime>
 #include			"AbsModelBDatabase.hpp"
 
 class					Msg {
@@ -12,12 +13,14 @@ public:
     this->col_tab.push_back("from");
     this->col_tab.push_back("to");
     this->col_tab.push_back("content");
-  }  
+    this->col_tab.push_back("date");
+  }
 
   int				id;
   int				from;
   int				to;
   std::string			content;
+  std::tm			date;
 };
 
 
@@ -37,6 +40,7 @@ namespace                       soci {
       u.from = v.get<int>("from");
       u.to = v.get<int>("to");
       u.content = v.get<std::string>("content");
+      u.date = v.get<std::tm>("date");
     }
 
     static void                 to_base(const Msg &u, values &v, indicator &ind)
@@ -45,6 +49,7 @@ namespace                       soci {
       v.set("from", u.from);
       v.set("to", u.to);
       v.set("content", u.content);
+      v.set("date", u.date);
       ind = i_ok;
     }
   };

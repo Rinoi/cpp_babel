@@ -87,7 +87,7 @@ namespace			Babel {
 	}
 
 	template<typename T> void			selectWhere(T &t, const std::string& w) {
-	  this->getDB() << "SELECT * FROM " << t.col_tab[0] << " WHERE " << w/*, soci::use<T>(t)*/, soci::into(t);
+	  this->getDB() << "SELECT * FROM " << t.col_tab[0] << " WHERE " << w, soci::use<T>(t), soci::into(t);
 	}
 
 	template<typename T> soci::rowset<T>&		selectMulti(const std::string& q) {

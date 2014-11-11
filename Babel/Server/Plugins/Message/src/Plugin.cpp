@@ -55,7 +55,13 @@ namespace Message
     m.from = (p.getConstHeader()).senderId;
     m.to = id;
     m.content = ms;
-    b.insert<Msg>(m);
+    try {
+      b.insert<Msg>(m);
+    }
+    catch (std::exception const &e)
+      {
+	std::cerr << "Error: Insert MSG in DB : Impossible was arrived : " << e.what() << std::endl;
+      }
     Babel::Common::Network::Packet  np(this->id, 1, 0, 0, id,
 				       ms.size(), (byte*)(ms.c_str()));
     this->server->send(np);

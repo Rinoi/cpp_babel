@@ -59,11 +59,18 @@ namespace Connection
     u.password = std::string(pwd);
     u.firstName = "";
     u.lastName = "";
+    u.userName = "";
     u.id = 0;
-    d.selectWhere<User>(u, req);
-    firstName = u.firstName;
-    lastName = u.lastName;
-    idx = u.id;
+    try {
+      d.selectWhere<User>(u, req);
+      firstName = u.firstName;
+      lastName = u.lastName;
+      idx = u.id;
+    }
+    catch (std::exception const &e)
+      {
+	std::cerr << "Error: loadUser don't match : " << e.what() << '\n';
+      }
   }
 
   byte		Plugin::createUser(const std::string	&mail		/*in*/,
@@ -74,14 +81,29 @@ namespace Connection
   {
     User						u;
     Babel::Server::Database::BabelDatabase &d = this->server->getDb();
+    std::string					req("email=:email");
 
     u.firstName = firstName;
     u.lastName = lastName;
     u.password = pwd;
     u.email = mail;
     u.userName = firstName + " " + lastName;
-    d.insert<User>(u);
-    idx = 42;
+    try {
+      d.insert<User>(u);
+    }
+    catch (std::exception const &e)
+      {
+	std::cerr << "Error: createUser : email already used : " << e.what() << '\n';
+	return (21);
+      }
+    try {
+      d.selectWhere<User>(u, req);
+    }
+    catch (std::exception const &e)
+      {
+	std::cerr << "Error: createUser : impossible arrived : " << e.what() << '\n';
+      }
+    idx = u.id;
     return (1);
   }
 

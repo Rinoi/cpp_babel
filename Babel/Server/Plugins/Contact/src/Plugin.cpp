@@ -17,8 +17,8 @@ namespace Contact
     this->list = new fct[this->max_fct];
     this->list[0] = &Plugin::logIn;
     this->list[1] = &Plugin::logOut;
-    this->list[0] = &Plugin::addFriend;
-    this->list[1] = &Plugin::deleteFriend;
+    this->list[2] = &Plugin::addFriend;
+    this->list[3] = &Plugin::deleteFriend;
   }
 
   Plugin::~Plugin()
@@ -146,15 +146,17 @@ namespace Contact
       data[i] = name[i];
     data += name.size() + 1;
 
+    // send Friend LIst
     it = list.begin();
     while (it != list.end())
       {
 	std::string s;
 
 	s = this->getName(*it);
-	*(int *)(data) = *it;
+	*(int *)(data) = *it; //id
 	data += sizeof(int);
-	for (unsigned int i = 0; i <= name.size(); i += 1)
+	// we need status
+	for (unsigned int i = 0; i <= name.size(); i += 1) //name
 	  *data++ = name[i];
 	
 	++it;

@@ -10,7 +10,7 @@
 
 CXX		=	g++
 
-NAME		=	pluginConnection.so
+NAME		=	pluginContact.so
 
 CXXFLAGS	=	-Wextra -Wall -W -fPIC -std=c++11 $(INCS)
 

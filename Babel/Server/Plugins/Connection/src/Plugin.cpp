@@ -9,7 +9,7 @@
 
 namespace Connection
 {
-  Plugin::Plugin(Babel::Server::Network::Server *server)
+  Plugin::Plugin(Babel::Server::Network::IServer *server)
   {
     this->server = server;
     this->max_fct = 4;
@@ -115,7 +115,7 @@ namespace Connection
     std::string					firstName;
     std::string					lastName;
     int						idx = 0;
-    Babel::Server::Network::Session		*session;
+    Babel::Server::Network::ISession		*session;
     std::string					s;
     std::string					c(" ");
 
@@ -125,10 +125,10 @@ namespace Connection
     std::vector<std::string> strs;
     boost::split(strs, s, boost::is_any_of(c.c_str()));
     std::cout << "NBR : " << strs.size() << std::endl;
-    Babel::Server::Network::Session ** pp;
+    Babel::Server::Network::ISession ** pp;
 
-    pp = (Babel::Server::Network::Session **)(p.getData() + header.dataSize);
-    session = (Babel::Server::Network::Session *)(*pp);
+    pp = (Babel::Server::Network::ISession **)(p.getData() + header.dataSize);
+    session = (Babel::Server::Network::ISession *)(*pp);
     if (strs.size() != 2)
       {
 	Babel::Common::Network::Packet p(header.pluginId, header.actionId, 10, 0, 0, 0, NULL);
@@ -142,8 +142,8 @@ namespace Connection
     this->loadUser(mail, pwd, firstName, lastName, idx);
     if (idx > 0) // si sa match
       {
-	session->getRoom().leaveAnonymous(session);
-	session->getRoom().joinConnected(session, idx); //LOOOOOL
+	session->leaveAnonymousRoom();
+	session->joinConnectedRoom(idx); //LOOOOOL
 	std::string	s;
 
 	s += firstName;

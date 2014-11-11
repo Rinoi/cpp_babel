@@ -11,7 +11,7 @@
 
 extern "C"
 {
-	DLL_EXPORT Babel::Server::Plugin::AServerPlugin	*getPlugin(Babel::Server::Network::Server *server)
+	DLL_EXPORT Babel::Server::Plugin::AServerPlugin	*getPlugin(Babel::Server::Network::IServer *server)
   {
     return (new Connection::Plugin(server));
   }

@@ -27,6 +27,16 @@ namespace	Babel
 	this->_room.joinAnonymous(this);
 	this->readPacket();
       }
+
+      void                            Session::joinConnectedRoom(unsigned int id)
+      {
+	this->_room.joinConnected(this, id);
+      }
+
+      void                            Session::leaveAnonymousRoom()
+      {
+	this->_room.leaveAnonymous(this);
+      }
       
       void	Session::readPacket()
       {

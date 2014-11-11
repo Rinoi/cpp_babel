@@ -5,7 +5,7 @@
 #include <list>
 
 #include "../../AServerPlugin.hpp"
-#include "../../../Network/Server.hpp"
+#include "../../../Network/IServer.hpp"
 
 namespace Connection
 {
@@ -25,7 +25,7 @@ namespace Connection
     } t_plugin_event;
 
   public:
-    Plugin(Babel::Server::Network::Server *server);
+    Plugin(Babel::Server::Network::IServer *server);
     ~Plugin();
 
     bool				init();
@@ -61,7 +61,7 @@ namespace Connection
     std::list<t_plugin_event>		eventLogOut;
     fct					*list;
     int					max_fct;
-    Babel::Server::Network::Server *	server;
+    Babel::Server::Network::IServer *	server;
 
 
   };

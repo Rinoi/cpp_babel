@@ -29,15 +29,8 @@ LDFLAGS		+=	-lboost_system -ldl -lsoci_core -lsoci_mysql -lboost_thread -L/usr/l
 
 SRCS		=	src/main.cpp \
 			src/Plugin.cpp \
-			../PluginLoaderUnix.cpp \
-			../../Network/Room.cpp \
-			../../Network/Session.cpp \
-			../../Network/Server.cpp \
-			../../Network/Core.cpp \
-			../../Network/Channel.cpp \
 			../../Database/dbConnection.cpp \
 			../../../Common/Network/Packet.cpp \
-			../../../Common/Network/PacketManager.cpp \
 
 OBJS		=	$(SRCS:.cpp=.o)
 

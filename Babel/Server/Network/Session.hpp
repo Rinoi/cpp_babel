@@ -3,6 +3,7 @@
 
 #include			        <boost/asio.hpp>
 #include				"Room.hpp"
+#include				"ISession.hpp"
 #include				"../../Common/Network/Packet.hpp"
 
 using					boost::asio::ip::tcp;
@@ -16,7 +17,7 @@ namespace				Babel
     namespace				Network
     {
 
-      class				Session : public std::enable_shared_from_this<Session>
+      class				Session : public std::enable_shared_from_this<Session>, public ISession
       {
 	
       public:
@@ -29,6 +30,8 @@ namespace				Babel
 	void				start();
 	void				readPacket();
 	void				writePacket(const Babel::Common::Network::Packet &);
+	void                            joinConnectedRoom(unsigned int);
+        void                            leaveAnonymousRoom();
 
       public:
 	

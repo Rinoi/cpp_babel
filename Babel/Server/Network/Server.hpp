@@ -3,6 +3,7 @@
 
 #include								<list>
 #include								"Core.hpp"
+#include								"IServer.hpp"
 #include								"../Plugins/IPluginLoader.hpp"
 #include								"../Plugins/AServerPlugin.hpp"
 #include								"../Database/AbsModelBDatabase.hpp"
@@ -16,7 +17,7 @@ namespace								Babel
     namespace								Network
     {
       
-      class								Server
+      class								Server : public IServer
       {
 	
       public:

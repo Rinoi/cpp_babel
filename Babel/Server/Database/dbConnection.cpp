@@ -28,9 +28,15 @@ BabelDatabase::BabelDatabase()
       std::cerr << "Error: " << e.what() << '\n';
     }
   std::cout << "Connection success." << std::endl;
+  try {
   *(this->sql) << "CREATE TABLE IF NOT EXISTS " CONTACT;
   *(this->sql) << "CREATE TABLE IF NOT EXISTS " PLUGIN;
   *(this->sql) << "CREATE TABLE IF NOT EXISTS " MESSAGE;
+  }
+  catch (std::exception const &e)
+    {
+      std::cerr << "Error: " << e.what() << '\n';
+    }
 }
 
 BabelDatabase::~BabelDatabase()

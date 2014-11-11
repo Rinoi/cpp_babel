@@ -48,6 +48,7 @@ namespace   AudioCall
 
             *data = 42;
             const Babel::Common::Network::Packet p(3, 2, 0, 0, 0, sizeof(data), data);
+
             this->_network->sendToYourself(p);
         }
         {
@@ -55,6 +56,7 @@ namespace   AudioCall
 
             *data = 43;
             const Babel::Common::Network::Packet p(4, 1, 0, 0, 0, sizeof(data), data);
+
             this->_network->sendToYourself(p);
         }
         return (true);

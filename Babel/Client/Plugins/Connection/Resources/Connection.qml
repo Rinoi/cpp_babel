@@ -92,6 +92,7 @@ Rectangle
         {
             id: firstName
 
+
             y : parent.height * 0.30
 
             width: parent.width;height: parent.height * 0.10
@@ -114,7 +115,7 @@ Rectangle
             {
             id: firstNameInput
 
-            text: qsTr("");inputMask: qsTr("");placeholderText: qsTr("LastName")
+            text: qsTr("Louis");inputMask: qsTr("");placeholderText: qsTr("LastName")
             anchors.rightMargin: 5;anchors.leftMargin: 55;anchors.bottomMargin: 5;anchors.topMargin: 5;anchors.fill: parent
             horizontalAlignment: Text.AlignHCenter;verticalAlignment: Text.AlignVCenter
 
@@ -149,7 +150,7 @@ Rectangle
             {
             id: lastNameInput
 
-            text: qsTr(""); placeholderText: "LastName";inputMask: qsTr("");            anchors.rightMargin: 5;anchors.leftMargin: 55;anchors.bottomMargin: 5;anchors.topMargin: 5;anchors.fill: parent
+            text: qsTr("Martin-Pierrat"); placeholderText: "LastName";inputMask: qsTr("");            anchors.rightMargin: 5;anchors.leftMargin: 55;anchors.bottomMargin: 5;anchors.topMargin: 5;anchors.fill: parent
             horizontalAlignment: Text.AlignHCenter;verticalAlignment: Text.AlignVCenter
 
             font.pixelSize: 13
@@ -184,7 +185,7 @@ Rectangle
 		    {
             id: subscribeEmailInput
 
-            text: qsTr(""); placeholderText: "Email"; inputMask: qsTr("");            anchors.rightMargin: 5;anchors.leftMargin: 55;anchors.bottomMargin: 5;anchors.topMargin: 5;anchors.fill: parent
+            text: qsTr("louis.martin-pierrat@epitech.eu"); placeholderText: "Email"; inputMask: qsTr("");            anchors.rightMargin: 5;anchors.leftMargin: 55;anchors.bottomMargin: 5;anchors.topMargin: 5;anchors.fill: parent
             horizontalAlignment: Text.AlignHCenter;verticalAlignment: Text.AlignVCenter
 			
 			font.pixelSize: 13
@@ -219,7 +220,7 @@ Rectangle
             {
             id: passInput
 
-            text: qsTr(""); echoMode: 2;inputMask: qsTr("");placeholderText: qsTr("password")
+            text: qsTr("p_password"); echoMode: 2;inputMask: qsTr("");placeholderText: qsTr("password")
             anchors.rightMargin: 5;anchors.leftMargin: 55;anchors.bottomMargin: 5;anchors.topMargin: 5;anchors.fill: parent
             horizontalAlignment: Text.AlignHCenter;verticalAlignment: Text.AlignVCenter
 
@@ -255,7 +256,7 @@ Rectangle
             {
             id: verifPassInput
 
-            text: qsTr(""); echoMode: 2;inputMask: qsTr("");placeholderText: qsTr("verification Password")
+            text: qsTr("p_password"); echoMode: 2;inputMask: qsTr("");placeholderText: qsTr("verification Password")
             anchors.rightMargin: 5;anchors.leftMargin: 55;anchors.bottomMargin: 5;anchors.topMargin: 5;anchors.fill: parent
             horizontalAlignment: Text.AlignHCenter;verticalAlignment: Text.AlignVCenter
 
@@ -492,7 +493,7 @@ Rectangle
 		    TextField
             {
                 id: emailInput
-                text: "mart_p@epitech.eu"
+                text: "louis.martin-pierrat@epitech.eu"
 
             inputMask: qsTr("")
 			placeholderText: qsTr("Email")
@@ -553,7 +554,7 @@ Rectangle
 		    {
 			id: passwordInput
 
-            text : "mart_p_password"
+            text : "p_password"
 
 			echoMode: 2
 			placeholderText: qsTr("Password")

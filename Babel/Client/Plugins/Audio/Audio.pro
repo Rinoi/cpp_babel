@@ -16,6 +16,9 @@ DEFINES += AUDIO_LIBRARY
 
 SOURCES += Kernel.cpp \
             ./src/UserPeriph.cpp \
+            ./src/Audio/Input/PortAudio/InputPeriph.cpp \
+            ./src/Audio/Output/PortAudio/Periph.cpp \
+            ./src/Audio/PortAudio/Stream.cpp \
             ../../../Common/Network/Packet.cpp \
 
 

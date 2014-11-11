@@ -4,8 +4,8 @@
 # include <iostream>
 # include <list>
 
-//#include "../../inc/Babel/Audio/Input/PortAudio/Periph.hh"
-//#include "../../inc/Babel/Audio/Output/PortAudio/Periph.hh"
+#include "../../inc/Babel/Audio/Input/PortAudio/Periph.hh"
+#include "../../inc/Babel/Audio/Output/PortAudio/Periph.hh"
 #include "../../inc/Babel/IPeriph.hpp"
 
 namespace Babel

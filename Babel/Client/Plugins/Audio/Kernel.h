@@ -45,13 +45,12 @@ public:
     bool            init(void) {return true;}
 
 private:
-/*
     bool            getInputStream(const Babel::Common::Network::Packet &);
     bool            getOutputStream(const Babel::Common::Network::Packet &);
-*/
+
 private:
     Common::INetworkManager *_network;
-    //Babel::UserPeriph       userP;
+    Babel::UserPeriph       userP;
 
 };
 

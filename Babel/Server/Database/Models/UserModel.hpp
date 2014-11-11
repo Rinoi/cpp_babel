@@ -12,7 +12,7 @@ public:
     this->col_tab.push_back("users");
     this->col_tab.push_back("first_name");
     this->col_tab.push_back("last_name");
-    this->col_tab.push_back("username");
+    this->col_tab.push_back("user_name");
     this->col_tab.push_back("email");
     this->col_tab.push_back("password");
   }
@@ -41,7 +41,7 @@ namespace                       soci {
       u.id = v.get<int>("id");
       u.firstName = v.get<std::string>("first_name");
       u.lastName = v.get<std::string>("last_name");
-      u.userName = v.get<std::string>("username");
+      u.userName = v.get<std::string>("user_name");
       u.email = v.get<std::string>("email");
       u.password = v.get<std::string>("password");
     }
@@ -51,7 +51,7 @@ namespace                       soci {
       v.set("id", u.id);
       v.set("first_name", u.firstName);
       v.set("last_name", u.lastName);
-      v.set("username", u.userName);
+      v.set("user_name", u.userName);
       v.set("email", u.email);
       v.set("password", u.password);
       ind = i_ok;

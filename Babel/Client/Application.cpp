@@ -41,36 +41,39 @@ namespace	Babel
 
         if ((plugin = this->_pluginLoader.loadPlugin("connection")) != 0)
         {
+            plugin->setNetworkInterface(&this->_network);
             if (plugin->needGraphicUI() == true)
             {
-                std::cout << "HELLO efwefwe" << std::endl;
                 QQuickView *view = new QQuickView(&this->_qmlEngine, this->_window);
                 view->setMinimumSize(QSize(this->_window->width(), this->_window->height()));
 //                view->setY(25);
                 Babel::Client::Common::IPluginView *connectionView = new Babel::Client::PluginView(view);
-                plugin->setNetworkInterface(&this->_network);
-
                 plugin->setGraphicUI(connectionView);
                 view->show();
-                std::cout << "HELLO efwefwe" << std::endl;
             }
         }
 
 
-        if ((plugin = this->_pluginLoader.loadPlugin("AudioCall")) != 0)
-        {
-                qDebug() << "module AudioCall loaded";
-        }
         if ((plugin = this->_pluginLoader.loadPlugin("Audio")) != 0)
         {
+            plugin->setNetworkInterface(&this->_network);
                 qDebug() << "module Audio loaded";
         }
 
-
         if ((plugin = this->_pluginLoader.loadPlugin("Encode")) != 0)
         {
+            plugin->setNetworkInterface(&this->_network);
                 qDebug() << "module Encode loaded";
         }
+
+        if ((plugin = this->_pluginLoader.loadPlugin("AudioCall")) != 0)
+        {
+            plugin->setNetworkInterface(&this->_network);
+                qDebug() << "module AudioCall loaded";
+        }
+
+
+        plugin->init();
 
     }
 

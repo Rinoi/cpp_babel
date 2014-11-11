@@ -61,8 +61,10 @@ bool NetworkManager::SendToServer(const ::Babel::Common::Network::Packet &pack) 
 void    NetworkManager::sendToYourself(const ::Babel::Common::Network::Packet &pack) {
     if (this->_inst && this->_callBack) {
         QByteArray  data((const char *)pack.getData());
+
         const ::Babel::Common::Network::Header &hed = pack.getConstHeader();
         ::Babel::Client::Network::QPacket *packet = new ::Babel::Client::Network::QPacket(hed.pluginId, hed.actionId, hed.response, hed.senderId, hed.receiverId, data);
+        qDebug() << "SENDING TO ID : " << hed.pluginId;
         (this->_inst->*(this->_callBack))(*packet);
     }
 }

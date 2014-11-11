@@ -49,8 +49,12 @@ namespace	Babel
     PluginLoader::redirectPacket(const Babel::Common::Network::Packet &packet) {
         const Babel::Common::Network::Header &head = packet.getConstHeader();
         Babel::Common::Network::byte pluginId = head.pluginId;
+        qDebug() << "GETTING PACKET FOR ID : " << pluginId;
+
         if (!_loadedIdentified.contains(pluginId)) {
+            qDebug() << "Does not contqins pluginID " << pluginId;
             if (!this->_needId.empty()) {
+
                 this->_loadedIdentified[pluginId] = this->_loadedPlugins[this->_needId.front()];
                 this->_needId.pop_front();
             }

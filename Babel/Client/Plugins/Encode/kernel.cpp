@@ -1,7 +1,20 @@
-#include "kernel.h"
 #include <QDebug>
 
+#include "kernel.h"
 #include "inc/Babel/Audio/Opus/Encode.hh"
+
+
+#ifdef Q_OS_WIN
+#  define MY_EXPORT __declspec(dllexport)
+#else
+#  define MY_EXPORT
+#endif
+
+
+extern "C" MY_EXPORT Babel::Client::Common::IClientPlugin *Instantiate(void)
+{
+  return new Babel::Client::Plugins::Encode::Kernel();
+}
 
 namespace   Babel
 {
@@ -34,7 +47,7 @@ Kernel::handlePacket(const Babel::Common::Network::Packet &packet)
 }
 
 bool
-Kernel::getEncode(const Babel::Common::Network::Packet &packet)
+Kernel::getEncode(const Babel::Common::Network::Packet &packet) const
 {
     const Babel::Common::Network::Header &header = packet.getConstHeader();
 
@@ -47,7 +60,7 @@ Kernel::getEncode(const Babel::Common::Network::Packet &packet)
 
         *(void **)(data) = (void *)(this->encode);
         Babel::Common::Network::Packet p(header.pluginId, b, 0, 0, 0, sizeof(void *), data);
-        this->_network->SendToServer(p);
+        this->_network->sendToYourself(p);
         return (true);
     }
     return (false);

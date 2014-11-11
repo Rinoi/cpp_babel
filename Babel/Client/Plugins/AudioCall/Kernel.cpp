@@ -1,6 +1,20 @@
 #include "Kernel.h"
 
 #include <QDebug>
+#include <QTime>
+
+
+#ifdef Q_OS_WIN
+#  define MY_EXPORT __declspec(dllexport)
+#else
+#  define MY_EXPORT
+#endif
+
+
+extern "C" MY_EXPORT Babel::Client::Common::IClientPlugin *Instantiate(void)
+{
+  return new Babel::Client::Plugins::AudioCall::Kernel();
+}
 
 namespace   Babel
 {
@@ -27,21 +41,21 @@ namespace   AudioCall
 
             *data = 41;
             const Babel::Common::Network::Packet p(3, 1, 0, 0, 0, sizeof(data), data);
-            this->_network->SendToServer(p);
+            this->_network->sendToYourself(p);
         }
         {
             byte    *data = new byte[1];
 
             *data = 42;
             const Babel::Common::Network::Packet p(3, 2, 0, 0, 0, sizeof(data), data);
-            this->_network->SendToServer(p);
+            this->_network->sendToYourself(p);
         }
         {
             byte    *data = new byte[1];
 
             *data = 43;
             const Babel::Common::Network::Packet p(4, 1, 0, 0, 0, sizeof(data), data);
-            this->_network->SendToServer(p);
+            this->_network->sendToYourself(p);
         }
         return (true);
     }
@@ -75,6 +89,8 @@ namespace   AudioCall
         if (p.getConstHeader().dataSize == sizeof(void *))
         {
             this->outputStream = (Babel::IStream *)(p.getData());
+            if (this->outputStream != NULL && this->inputStream != NULL)
+                this->call("loool");
             return (true);
         }
         return (false);
@@ -91,6 +107,24 @@ namespace   AudioCall
         return (false);
     }
 
+#define DEFAULT_BUFFER_SIZE (42000 * 5)
+
+    bool
+    Kernel::call(const QString &)
+    {
+        byte      *buffer;
+        unsigned int size;
+
+        buffer = new byte[DEFAULT_BUFFER_SIZE * sizeof(SAMPLE)];
+        while (42)
+        {
+            QTime dieTime= QTime::currentTime().addMSecs(100);
+            while( QTime::currentTime() < dieTime )
+                QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+            size = this->inputStream->read(buffer, DEFAULT_BUFFER_SIZE);
+            this->outputStream->write(buffer, size);
+        }
+    }
 }
 }
 }

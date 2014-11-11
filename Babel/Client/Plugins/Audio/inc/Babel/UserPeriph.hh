@@ -4,9 +4,9 @@
 # include <iostream>
 # include <list>
 
-#include "../../inc/Babel/Audio/Input/PortAudio/Periph.hh"
-#include "../../inc/Babel/Audio/Output/PortAudio/Periph.hh"
-
+//#include "../../inc/Babel/Audio/Input/PortAudio/Periph.hh"
+//#include "../../inc/Babel/Audio/Output/PortAudio/Periph.hh"
+#include "../../inc/Babel/IPeriph.hpp"
 
 namespace Babel
 {
@@ -18,14 +18,14 @@ namespace Babel
 		UserPeriph();
 		~UserPeriph();
 
-    Babel::Audio::Input::APeriph		*getDefaultAInput();
-    Babel::Audio::Output::APeriph		*getDefaultAOutput();
+    Babel::IPeriph		*getDefaultAInput();
+    Babel::IPeriph		*getDefaultAOutput();
 
   private:
 
     std::list<IPeriph *>			periphs;
-    Babel::Audio::Input::APeriph		*defaultAInput;
-    Babel::Audio::Output::APeriph		*defaultAOutput;
+    Babel::IPeriph		*defaultAInput;
+    Babel::IPeriph		*defaultAOutput;
 
   };
 

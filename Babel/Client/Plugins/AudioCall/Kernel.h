@@ -4,7 +4,7 @@
 #if defined(AUDIOCALL_LIBRARY)
 # define AUDIOCALLSHARED_EXPORT Q_DECL_EXPORT
 #else
-# define CONNECTIONSHARED_EXPORT Q_DECL_IMPORT
+# define AUDIOCALLSHARED_EXPORT Q_DECL_IMPORT
 #endif
 
 #include    "../../Common/IClientPlugin.h"
@@ -33,7 +33,7 @@ public:
         return false;
     }
 
-    void            setGraphicUI(Babel::Client::Common::IPluginView *ipluginView) {}
+    void            setGraphicUI(Babel::Client::Common::IPluginView *) {}
     void            setNetworkInterface(Babel::Client::Common::INetworkManager *network)
     {
         this->_network = network;

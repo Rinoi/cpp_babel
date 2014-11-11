@@ -29,6 +29,9 @@ public:
     ~Kernel(void);
 
 public:
+
+    inline bool         init(void) { return true; }
+
     inline bool        needGraphicUI(void)
     {
         return false;

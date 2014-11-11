@@ -14,7 +14,7 @@ public:
     this->col_tab.push_back("last_name");
     this->col_tab.push_back("user_name");
     this->col_tab.push_back("email");
-    this->col_tab.push_back("password");
+    this->col_tab.push_back("pwd");
   }
 
   int				id;
@@ -43,7 +43,7 @@ namespace                       soci {
       u.lastName = v.get<std::string>("last_name");
       u.userName = v.get<std::string>("user_name");
       u.email = v.get<std::string>("email");
-      u.password = v.get<std::string>("password");
+      u.password = v.get<std::string>("pwd");
     }
 
     static void                 to_base(const User &u, values &v, indicator &ind)
@@ -53,7 +53,7 @@ namespace                       soci {
       v.set("last_name", u.lastName);
       v.set("user_name", u.userName);
       v.set("email", u.email);
-      v.set("password", u.password);
+      v.set("pwd", u.password);
       ind = i_ok;
     }
   };

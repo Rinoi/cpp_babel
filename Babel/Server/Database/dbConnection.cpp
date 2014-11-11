@@ -25,7 +25,7 @@ BabelDatabase::BabelDatabase()
     }
   catch (std::exception const &e)
     {
-      std::cerr << "Error: " << e.what() << '\n';
+      std::cerr << "Error: " << e.what() << std::endl;
     }
   std::cout << "Connection success." << std::endl;
   try {

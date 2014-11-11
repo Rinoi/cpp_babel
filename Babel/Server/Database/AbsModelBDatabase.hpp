@@ -70,6 +70,7 @@ namespace			Babel {
         }
 
 	template<typename T>void			insert(const T &t) {
+	  std::cout << "Req : " << "INSERT INTO " << this->_reqInsert(t) << std::endl;
 	  this->getDB() << "INSERT INTO " << this->_reqInsert(t), soci::use<T>(t);
 	}
 

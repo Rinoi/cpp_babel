@@ -6,8 +6,8 @@ using namespace Server;
 using namespace Database;
 using namespace soci;
 
-#define CONTACT                 "users(id INT NOT NULL AUTO_INCREMENT, first_name VARCHAR(255) NOT NULL, last_name VARCHAR(255) NOT NULL, user_name VARCHAR(255) NOT NULL, email VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL, PRIMARY KEY(id))"
-#define PLUGIN                  "plugin(id INT NOT NULL AUTO_INCREMENT, name VARCHAR(255) NOT NULL, PRIMARY KEY(id))"
+#define CONTACT                 "users(id INT NOT NULL AUTO_INCREMENT, first_name VARCHAR(255) NOT NULL, last_name VARCHAR(255) NOT NULL, user_name VARCHAR(255) NOT NULL, email VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL, PRIMARY KEY(id), UNIQUE(email))"
+#define PLUGIN                  "plugin(id INT NOT NULL AUTO_INCREMENT, name VARCHAR(255) NOT NULL, PRIMARY KEY(id), UNIQUE(name))"
 #define MESSAGE			"message(id INT NOT NULL AUTO_INCREMENT, `from` INT NOT NULL, `to` INT NOT NULL, content VARCHAR(255) NOT NULL, PRIMARY KEY(id))"
 #define USERDB                  "babel"
 #define PASSDB                  "babel"

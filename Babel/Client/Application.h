@@ -4,6 +4,7 @@
 #include	<QApplication>
 #include	<QQmlApplicationEngine>
 #include	<QWindow>
+#include    <QQuickView>
 
 #include    "Network/networkmanager.h"
 #include	"PluginLoader.h"
@@ -24,12 +25,12 @@ namespace	Babel
       void          onConnectedToServer(bool onConnected = true);
       void          onConnectionFailed(void);
       void          onConnectionSuccess(void);
-      void          loadConnectionPlugin(void);
+      bool          loadConnectionPlugin(void);
       void          reconnectToServer(void);
 
     private:
       QApplication                              _app;
-      QQmlApplicationEngine                 	_qmlEngine;
+      QQmlApplicationEngine                   	_qmlEngine;
       PluginLoader                              _pluginLoader;
       QWindow                                   *_window;
       Network::NetworkManager                   _network;

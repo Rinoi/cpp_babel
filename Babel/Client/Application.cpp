@@ -14,7 +14,7 @@ namespace	Babel
 
     Application::Application(int ac, char *av[]) :
       _app(ac, av),
-      _network("localhost", 4242, 8080),
+      _network("10.17.73.4", 4242, 8080),
 //      _network("10.17.72.243", 4242, 8080),
 //      _network("localhost", 4242, 8080),
       _anchor(*this)
@@ -34,10 +34,11 @@ namespace	Babel
         }
     }
 
-    void
+    bool
     Application::loadConnectionPlugin(void)
     {
         Babel::Client::Common::IClientPlugin	*plugin;
+        bool    ret = false;
 
         if ((plugin = this->_pluginLoader.loadPlugin("connection")) != 0)
         {
@@ -51,6 +52,7 @@ namespace	Babel
                 Babel::Client::Common::IPluginView *connectionView = new Babel::Client::PluginView(view);
                 plugin->setGraphicUI(connectionView);
                 view->show();
+                ret = true;
             }
         }
 
@@ -77,8 +79,8 @@ namespace	Babel
         }
 
 
-        plugin->init();
-
+        //plugin->init();
+        return ret;
     }
 
     void

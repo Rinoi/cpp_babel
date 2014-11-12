@@ -18,10 +18,10 @@ ApplicationAnchor::reconnectToServer()
     this->_app.reconnectToServer();
 }
 
-void
+bool
 ApplicationAnchor::loadConnectionPlugin()
 {
-    this->_app.loadConnectionPlugin();
+    return this->_app.loadConnectionPlugin();
 }
 
 }

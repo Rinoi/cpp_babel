@@ -30,7 +30,7 @@ namespace	Babel
 
       void		setSource(const QUrl &url)
       {
-	this->_view->setSource(url);
+            this->_view->setSource(url);
       }
 
       void		show(void)
@@ -41,6 +41,7 @@ namespace	Babel
           item->setFlag(QQuickItem::ItemHasContents);
           item->update();
           this->_view->show();
+          qDebug() << this->_view->status() << "test";
       }
 
       QQuickItem	*getItem(void)

@@ -18,7 +18,7 @@ public:
     ApplicationAnchor(Babel::Client::Application &);
 
     Q_INVOKABLE void    reconnectToServer(void);
-    Q_INVOKABLE void    loadConnectionPlugin(void);
+    Q_INVOKABLE bool    loadConnectionPlugin(void);
 
 private:
     Babel::Client::Application  &_app;

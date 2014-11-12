@@ -7,7 +7,13 @@ ApplicationWindow
     width: 600
     height: 700
     title: qsTr("babel-2017-mart_q")
-
+Loader {
+    id: pageLoader
+    asynchronous:true
+    width: 600
+    height: 700
+    //onLoaded: console.log("Loaded bitch !");
+}
 Rectangle
 {
     id: drawingZone
@@ -64,7 +70,11 @@ Rectangle
                     PropertyAnimation {target: backgroundInfo; easing.type: "OutCubic" ; property : "height"; to:600; duration: 500}
                     onRunningChanged: {
                         if (animation.running == false){
-                            applicationAnchor.loadConnectionPlugin();
+                            if (applicationAnchor.loadConnectionPlugin() == true)
+                                {
+                                    pageLoader.source = "../Resources/Connection.qml";
+                                    drawingZone.visible = false;
+                                }
                         }
                     }
                 }

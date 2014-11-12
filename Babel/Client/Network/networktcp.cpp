@@ -106,6 +106,16 @@ int NetworkTCP::send(const ::Babel::Common::Network::Packet &pack)
 {
     if (this->isConnected())
     {
+        const ::Babel::Common::Network::Header  &head = pack.getConstHeader();
+
+        qDebug() << "HEADER SEND==========================";
+        qDebug() << "pluginID " << head.pluginId;
+        qDebug() << "senderID " << head.senderId;
+        qDebug() << "actionID " << head.actionId;
+        qDebug() << "receiverID " << head.receiverId;
+        qDebug() << "response " << head.response;
+        qDebug() << "dataSize " << head.dataSize;
+
         this->_sock.write((const char *)(&pack.getConstHeader()), pack.getHeaderSize());
         this->_sock.write((const char *)pack.getData(), pack.getDataSize());
         if (this->_sock.waitForBytesWritten() == false) {

@@ -72,7 +72,7 @@ Rectangle
                         if (animation.running == false){
                             if (applicationAnchor.loadConnectionPlugin() == true)
                                 {
-                                    pageLoader.source = "../Resources/Connection.qml";
+                                    pageLoader.source = "../Resources/Connection/Connection.qml";
                                     drawingZone.visible = false;
                                 }
                         }

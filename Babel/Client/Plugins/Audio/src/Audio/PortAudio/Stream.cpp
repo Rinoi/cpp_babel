@@ -21,7 +21,7 @@ namespace Babel
     std::memset(this->buffer.data, 0, sizeof(SAMPLE) * this->buffer.max_idx);
 
 	this->buffer.parent = NULL;
-    this->buffer.mutex = new std::mutex();
+    this->buffer.mutex = new QMutex();
       }
 
       Stream::Stream(const Stream &parent)

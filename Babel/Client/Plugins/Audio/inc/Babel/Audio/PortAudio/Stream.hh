@@ -3,12 +3,12 @@
 
 #include <cstdio>
 #include <cstdlib>
-#include <mutex>
+#include <QMutex>
 
 extern "C"
 {
  #include <string.h>
- #include "portaudio.h"
+ #include <portaudio.h>
 }
 
 #include <iostream>
@@ -46,7 +46,7 @@ namespace Babel
 	int                         idx;
 	int                         max_idx;
 	SAMPLE                      *data;
-    std::mutex                  *mutex;
+	QMutex	                    *mutex;
 	const struct s_buffer       *parent;
       } t_buffer;
       

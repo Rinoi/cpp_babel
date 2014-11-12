@@ -3,7 +3,7 @@
 
 #include <cstdio>
 #include <cstdlib>
-#include <mutex>
+#include <QMutex>
 
 extern "C"
 {
@@ -46,7 +46,7 @@ namespace Babel
 	int                         idx;
 	int                         max_idx;
 	SAMPLE                      *data;
-    std::mutex                  *mutex;
+	Qmutex                      *mutex;
 	const struct s_buffer       *parent;
       } t_buffer;
       

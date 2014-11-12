@@ -60,7 +60,7 @@ INCLUDEPATH += ./inc
 
 
 
-INCLUDEPATH += $$quote(C:\\Program Files (x86)\\portaudio\\include\\)
+#INCLUDEPATH += $$quote(C:\\Program Files (x86)\\portaudio\\include\\)
 
-LIBS += C:\Users\louis\Downloads\precompiled-portaudio-windows-master\portaudio-r1891-build\lib\x64\Debug\portaudio_x64.lib
+#LIBS += C:\Users\louis\Downloads\precompiled-portaudio-windows-master\portaudio-r1891-build\lib\x64\Debug\portaudio_x64.lib
 

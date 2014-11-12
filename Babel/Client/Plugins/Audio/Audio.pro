@@ -46,8 +46,9 @@ HEADERS +=      ../../Common/IPluginView.h          \
 HEADERS +=      ../../../Common/IPlugin.h           \
                 ../../../Common/Network/Packet.hpp
 
-
-
+unix {
+    INCLUDEPATH += /usr/local/include/
+}
 
 unix {
     target.path = /usr/lib

@@ -6,7 +6,7 @@
 
 QT              -=      gui
 
-QT              +=      qml quick
+QT              +=      qml quick widgets
 
 TARGET          =       connection
 TEMPLATE        =       lib
@@ -17,9 +17,11 @@ SOURCES         +=      Kernel.cpp                          \
                         ConnectionAnchor.cpp                \
                         ../../Common/QPacket.cpp            \
                         ../../../Common/Network/Packet.cpp  \
+    qtquick2controlsapplicationviewer.cpp
 
 HEADERS         +=      Kernel.h                        \
-                        ConnectionAnchor.h
+                        ConnectionAnchor.h \
+    qtquick2controlsapplicationviewer.h
 
 HEADERS         +=      ../../Common/IPluginView.h     \
                         ../../Common/IClientPlugin.h   \

@@ -34,7 +34,10 @@ Kernel::~Kernel(void)
 bool
 Kernel::handlePacket(const Babel::Common::Network::Packet &packet)
 {
-    qDebug() << "[ENCODE PLUGIN] : handle packet called";
+    qDebug() << "[AUDIO PLUGIN] : handle packet called";
+
+
+    qDebug() << "[AUDIO action id] : " << packet.getConstHeader().actionId;
 
     if (packet.getConstHeader().actionId == 1)
         return (this->getInputStream(packet));
@@ -49,15 +52,20 @@ Kernel::getInputStream(const Babel::Common::Network::Packet &packet)
 {
     const Babel::Common::Network::Header &header = packet.getConstHeader();
 
-    if (header.dataSize == 1)
+    qDebug() << "[AUDIO PLUGIN]get InputStream called";
+    qDebug() << header.dataSize;
+    if (header.dataSize == sizeof(byte))
     {
         byte b;
 
         b = *packet.getData();
         byte *data = new byte[sizeof(void *)];
+        void *ptn = (void *)(this->userP.getDefaultAInput()->getStream());
 
-        *((void **)(data)) = (void *)(this->userP.getDefaultAInput()->getStream());
-        Babel::Common::Network::Packet p(header.pluginId, b, 0, 0, 0, sizeof(void *), data);
+        qDebug() << "ptn : " << ptn;
+        *((void **)(data)) = (void *)(ptn);
+        qDebug() << "re ptn : " << *(void **)(data);
+        Babel::Common::Network::Packet p(2, b, 0, 0, 0, sizeof(void *), data);
         this->_network->sendToYourself(p);
         return (true);
     }
@@ -70,7 +78,7 @@ Kernel::getOutputStream(const Babel::Common::Network::Packet &packet)
 {
     const Babel::Common::Network::Header &header = packet.getConstHeader();
 
-    if (header.dataSize == 1)
+    if (header.dataSize == sizeof(byte))
     {
         byte b;
 
@@ -78,12 +86,11 @@ Kernel::getOutputStream(const Babel::Common::Network::Packet &packet)
         byte *data = new byte[sizeof(void *)];
 
         *(void **)(data) = (void *)(this->userP.getDefaultAInput()->getStream());
-        Babel::Common::Network::Packet p(header.pluginId, b, 0, 0, 0, sizeof(void *), data);
+        Babel::Common::Network::Packet p(2, b, 0, 0, 0, sizeof(void *), data);
         this->_network->sendToYourself(p);
         return (true);
     }
     return (false);
-
 }
 
 }

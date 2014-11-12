@@ -51,17 +51,34 @@ namespace	Babel
         Babel::Common::Network::byte pluginId = head.pluginId;
         qDebug() << "GETTING PACKET FOR ID : " << pluginId;
 
-        if (!_loadedIdentified.contains(pluginId)) {
-            qDebug() << "Does not contqins pluginID " << pluginId;
-            if (!this->_needId.empty()) {
+//        if (!_loadedIdentified.contains(pluginId)) {
+//            qDebug() << "Does not contqins pluginID " << pluginId;
+//            if (!this->_needId.empty()) {
 
-                this->_loadedIdentified[pluginId] = this->_loadedPlugins[this->_needId.front()];
-                this->_needId.pop_front();
-            }
-        }
+//                qDebug() << pluginId << " : " << this->_needId.front();
+
+//                this->_loadedIdentified[pluginId] = this->_loadedPlugins[this->_needId.front()];
+//                this->_needId.pop_front();
+//            }
+//        }
+        qDebug() << "SO DATA data size : " << head.dataSize;
+
         if (_loadedIdentified.contains(pluginId)) {
             this->_loadedIdentified[pluginId]->handlePacket(packet);
         }
     }
+
+    bool
+    PluginLoader::setPluginId(const QString &name, Babel::Common::Network::byte id) {
+
+        if (_loadedPlugins.contains(name)) {
+            this->_loadedIdentified[id] = _loadedPlugins[name];
+            qDebug() << "true";
+            return (true);
+        }
+        qDebug() << "false";
+        return false;
+    }
+
 }
 }

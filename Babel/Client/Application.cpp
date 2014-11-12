@@ -41,6 +41,7 @@ namespace	Babel
 
         if ((plugin = this->_pluginLoader.loadPlugin("connection")) != 0)
         {
+            this->_pluginLoader.setPluginId("connection", 1);
             plugin->setNetworkInterface(&this->_network);
             if (plugin->needGraphicUI() == true)
             {
@@ -56,20 +57,23 @@ namespace	Babel
 
         if ((plugin = this->_pluginLoader.loadPlugin("Audio")) != 0)
         {
+            this->_pluginLoader.setPluginId("Audio", 3);
             plugin->setNetworkInterface(&this->_network);
                 qDebug() << "module Audio loaded";
         }
 
         if ((plugin = this->_pluginLoader.loadPlugin("Encode")) != 0)
         {
+            this->_pluginLoader.setPluginId("Encode", 4);
             plugin->setNetworkInterface(&this->_network);
                 qDebug() << "module Encode loaded";
         }
 
         if ((plugin = this->_pluginLoader.loadPlugin("AudioCall")) != 0)
         {
+            this->_pluginLoader.setPluginId("AudioCall", 2);
             plugin->setNetworkInterface(&this->_network);
-                qDebug() << "module AudioCall loaded";
+            qDebug() << "module AudioCall loaded";
         }
 
 

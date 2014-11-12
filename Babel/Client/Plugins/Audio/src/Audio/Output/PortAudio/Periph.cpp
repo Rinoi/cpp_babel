@@ -23,13 +23,15 @@ namespace Babel
 	      std::cout << "cannot creat param" << std::endl;
 	      return ;
 	    }
+      else
+          std::cout << "DEVICE CREATE" << std::endl;
 	  this->param.channelCount = 2; // stereo input                                                                     
 	  this->param.sampleFormat = PA_SAMPLE_TYPE;
 	  this->param.suggestedLatency = Pa_GetDeviceInfo(this->param.device)->defaultLowInputLatency;
 	  this->param.hostApiSpecificStreamInfo = NULL;
 
 	  deviceInfo = Pa_GetDeviceInfo(device);
-	  this->name = std::string(deviceInfo->name); 
+      this->name = std::string(deviceInfo->name);
 	}
 
 	Periph::~Periph()

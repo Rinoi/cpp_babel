@@ -27,6 +27,7 @@ namespace	Babel
       //-------------------------------
       Babel::Client::Common::IClientPlugin			*loadPlugin(const QString &);
       void               redirectPacket(const Babel::Common::Network::Packet &packet);
+      bool                 setPluginId(const QString &name, Babel::Common::Network::byte id);
     private:
       QMap<QString, Babel::Client::Common::IClientPlugin *>	_loadedPlugins;
       QList<QString>                                        _needId;

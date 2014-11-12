@@ -59,7 +59,7 @@ Kernel::getEncode(const Babel::Common::Network::Packet &packet) const
         byte *data = new byte[sizeof(void *)];
 
         *(void **)(data) = (void *)(this->encode);
-        Babel::Common::Network::Packet p(header.pluginId, b, 0, 0, 0, sizeof(void *), data);
+        Babel::Common::Network::Packet p(2, b, 0, 0, 0, sizeof(void *), data);
         this->_network->sendToYourself(p);
         return (true);
     }

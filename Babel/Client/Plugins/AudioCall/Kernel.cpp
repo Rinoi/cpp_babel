@@ -3,6 +3,7 @@
 #include <QDebug>
 #include <QTime>
 
+#include <QThread>
 
 #ifdef Q_OS_WIN
 #  define MY_EXPORT __declspec(dllexport)
@@ -40,14 +41,14 @@ namespace   AudioCall
             byte    *data = new byte[1];
 
             *data = 41;
-            const Babel::Common::Network::Packet p(3, 1, 0, 0, 0, sizeof(data), data);
+            const Babel::Common::Network::Packet p(3, 1, 0, 0, 0, 1, data);
             this->_network->sendToYourself(p);
         }
         {
             byte    *data = new byte[1];
 
             *data = 42;
-            const Babel::Common::Network::Packet p(3, 2, 0, 0, 0, sizeof(data), data);
+            const Babel::Common::Network::Packet p(3, 2, 0, 0, 0, 1, data);
 
             this->_network->sendToYourself(p);
         }
@@ -55,8 +56,7 @@ namespace   AudioCall
             byte    *data = new byte[1];
 
             *data = 43;
-            const Babel::Common::Network::Packet p(4, 1, 0, 0, 0, sizeof(data), data);
-
+            const Babel::Common::Network::Packet p(4, 1, 0, 0, 0, 1, data);
             this->_network->sendToYourself(p);
         }
         return (true);
@@ -65,11 +65,14 @@ namespace   AudioCall
     bool
     Kernel::handlePacket(const Babel::Common::Network::Packet &p)
     {
-        if (p.getConstHeader().actionId == 42)
+
+        qDebug() << "AudioCall handlePacket called with action id " << p.getConstHeader().actionId;
+
+        if (p.getConstHeader().actionId == 41)
             return (this->getInputStream(p));
         if (p.getConstHeader().actionId == 42)
             return (this->getOutputStream(p));
-        if (p.getConstHeader().actionId == 42)
+        if (p.getConstHeader().actionId == 43)
             return (this->getEncode(p));
         return true;
     }
@@ -79,7 +82,10 @@ namespace   AudioCall
     {
         if (p.getConstHeader().dataSize == sizeof(void *))
         {
-            this->inputStream = (Babel::IStream *)(p.getData());
+            this->inputStream = *(Babel::Audio::IStream **)(p.getData());
+            qDebug() << "[Audio call] input at " << this->inputStream;
+            if (this->outputStream != NULL && this->inputStream != NULL)
+                this->call("loool");
             return (true);
         }
         return (false);
@@ -90,7 +96,7 @@ namespace   AudioCall
     {
         if (p.getConstHeader().dataSize == sizeof(void *))
         {
-            this->outputStream = (Babel::IStream *)(p.getData());
+            this->outputStream = *(Babel::Audio::IStream **)(p.getData());
             if (this->outputStream != NULL && this->inputStream != NULL)
                 this->call("loool");
             return (true);
@@ -104,6 +110,8 @@ namespace   AudioCall
         if (p.getConstHeader().dataSize == sizeof(void *))
         {
             this->encode = (Babel::Audio::IEncode *)(p.getData());
+            if (this->outputStream != NULL && this->inputStream != NULL)
+                this->call("loool");
             return (true);
         }
         return (false);
@@ -114,16 +122,20 @@ namespace   AudioCall
     bool
     Kernel::call(const QString &)
     {
-        byte      *buffer;
-        unsigned int size;
+        SAMPLE          *buffer;
+        unsigned int    size;
 
-        buffer = new byte[DEFAULT_BUFFER_SIZE * sizeof(SAMPLE)];
+        qDebug() << "function call called";
+        buffer = new SAMPLE[DEFAULT_BUFFER_SIZE * sizeof(SAMPLE)];
         while (42)
         {
             QTime dieTime= QTime::currentTime().addMSecs(100);
             while( QTime::currentTime() < dieTime )
                 QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+            //qDebug() << "read : ";
             size = this->inputStream->read(buffer, DEFAULT_BUFFER_SIZE);
+            //qDebug() << "data size : " << size;
+            //qDebug() << buffer[0] << buffer[1] << buffer[2] << buffer[3] << buffer[4];
             this->outputStream->write(buffer, size);
         }
     }

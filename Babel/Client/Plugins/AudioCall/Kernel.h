@@ -8,7 +8,9 @@
 #endif
 
 #include    "../../Common/IClientPlugin.h"
-#include    "IStream.hpp"
+
+#include    "./inc/Babel/Audio/IStream.hpp"
+
 #include    "IEncode.hpp"
 
 namespace Babel
@@ -53,8 +55,8 @@ private:
 
 private:
 
-    Babel::IStream                          *inputStream;
-    Babel::IStream                          *outputStream;
+    Babel::Audio::IStream                   *inputStream;
+    Babel::Audio::IStream                   *outputStream;
     Babel::Audio::IEncode                   *encode;
 
     Babel::Client::Common::IPluginView      *_graphicView;

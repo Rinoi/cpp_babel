@@ -34,13 +34,14 @@ unix {
 }
 
 unix {
+    LIBS += -L/usr/local/lib -lopus
     LIBS += -L/usr/local/lib -lportaudio
     INCLUDEPATH += /usr/local/include/
-}
+}ß
 
 INCLUDEPATH += ./inc
-INCLUDEPATH += $$quote(C:\\Program Files (x86)\\opus-1.1\\include)
-INCLUDEPATH += $$quote(C:\\Users\\louis\\Downloads\\opus-1.1.tar\\opus-1.1\\win32)
+#INCLUDEPATH += $$quote(C:\\Program Files (x86)\\opus-1.1\\include)
+#INCLUDEPATH += $$quote(C:\\Users\\louis\\Downloads\\opus-1.1.tar\\opus-1.1\\win32)
 
 
 #LIBS += C:\Users\louis\Downloads\opus-1.1.tar\opus-1.1\win32\VS2010\x64\Debug\opus.lib

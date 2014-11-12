@@ -2,7 +2,11 @@
 # define __OPUS_ENCODE__
 
 #include "Babel/Audio/IEncode.hpp"
+#ifdef Q_WS_WIN
+#include <opus.h>
+#else
 #include <opus/opus.h>
+#endif
 
 #define SAMPLE_RATE     (48000)
 

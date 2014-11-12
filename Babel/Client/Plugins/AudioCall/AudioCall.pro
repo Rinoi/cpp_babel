@@ -30,6 +30,12 @@ HEADERS +=      ../../../Common/IPlugin.h           \
                 ../../../Common/Network/Packet.hpp
 
 unix {
+    LIBS += -L/usr/local/lib -lportaudio
+    LIBS += -L/usr/local/lib -lopus
+    INCLUDEPATH += /usr/local/include/
+}
+
+unix {
     target.path = /usr/lib
     INSTALLS += target
 }

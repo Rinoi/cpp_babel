@@ -51,6 +51,7 @@ unix {
 }
 
 unix {
+    LIBS += -L/usr/local/lib -lportaudio
     target.path = /usr/lib
     INSTALLS += target
 }

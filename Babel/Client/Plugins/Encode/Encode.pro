@@ -33,12 +33,18 @@ unix {
     INSTALLS += target
 }
 
+unix {
+    LIBS += -L/usr/local/lib -lportaudio
+    INCLUDEPATH += /usr/local/include/
+}
+
 INCLUDEPATH += ./inc
 INCLUDEPATH += $$quote(C:\\Program Files (x86)\\opus-1.1\\include)
 INCLUDEPATH += $$quote(C:\\Users\\louis\\Downloads\\opus-1.1.tar\\opus-1.1\\win32)
 
-LIBS += C:\Users\louis\Downloads\opus-1.1.tar\opus-1.1\win32\VS2010\x64\Debug\opus.lib
-LIBS += C:\Users\louis\Downloads\opus-1.1.tar\opus-1.1\win32\VS2010\x64\Debug\celt.lib
-LIBS += C:\Users\louis\Downloads\opus-1.1.tar\opus-1.1\win32\VS2010\x64\Debug\silk_common.lib
-LIBS += C:\Users\louis\Downloads\opus-1.1.tar\opus-1.1\win32\VS2010\x64\Debug\silk_float.lib
-LIBS += C:\Users\louis\Downloads\opus-1.1.tar\opus-1.1\win32\VS2010\x64\Debug\silk_fixed.lib
+
+#LIBS += C:\Users\louis\Downloads\opus-1.1.tar\opus-1.1\win32\VS2010\x64\Debug\opus.lib
+#LIBS += C:\Users\louis\Downloads\opus-1.1.tar\opus-1.1\win32\VS2010\x64\Debug\celt.lib
+#LIBS += C:\Users\louis\Downloads\opus-1.1.tar\opus-1.1\win32\VS2010\x64\Debug\silk_common.lib
+#LIBS += C:\Users\louis\Downloads\opus-1.1.tar\opus-1.1\win32\VS2010\x64\Debug\silk_float.lib
+#LIBS += C:\Users\louis\Downloads\opus-1.1.tar\opus-1.1\win32\VS2010\x64\Debug\silk_fixed.lib
